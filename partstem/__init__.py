@@ -1,22 +1,23 @@
 from nltk.stem import SnowballStemmer
 from nltk.stem.api import StemmerI
 import nltk
-
+import json
 
 class ParticleStemmer(SnowballStemmer):
 
-	def __init__(self, language="english", ignore_stopwords=False, suffix_rule_list={}, special_words={}):
+	def __init__(self, language="english", ignore_stopwords=False, suffix_rule_list={}):
 		super().__init__(language=language, ignore_stopwords=ignore_stopwords)
 		if language == "english":
 			self.stemmer._EnglishStemmer__special_words.update({
 				"":"",
 				})
-			self.stemmer._EnglishStemmer__special_words.update(special_words)
-			self.word_list = nltk.corpus.words.words()
+			
+			self.word_list = json.loads(open("word_list.json", r))
+			self.word_list += [el for el in nltk.corpus.words.words() if el not in self.word_list]
+			
 			self.stem = self.__stem
 			self.suffix_rule_list = {
 				'ant': {"with": ['ation'], "exception": []},
-				'at': {"with": ['ant'], "exception": []},
 				'eti': {"with": ['ant', ''], "exception": []},
 				'or': {"with": ['ion'], "exception": []},
 				'um': {"with": ['a'], "exception": ["medium"]},
