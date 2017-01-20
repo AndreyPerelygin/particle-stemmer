@@ -9,7 +9,21 @@ class ParticleStemmer(SnowballStemmer):
 		super().__init__(language=language, ignore_stopwords=ignore_stopwords)
 		if language == "english":
 			self.stemmer._EnglishStemmer__special_words.update({
-				"":"",
+				"experiment":"experiment", 
+				"experimented":"experiment", 
+				"experimenting":"experiment", 
+				"experiments":"experiment",
+				'organization': 'organiz',
+				"organization's": 'organiz',
+				'organizational': 'organiz',
+				'organizationally': 'organiz',
+				'organizations': 'organiz',
+				'organize': 'organiz',
+				'organized': 'organiz',
+				'organizer': 'organiz',
+				'organizers': 'organiz',
+				'organizes': 'organiz',
+				'organizing': 'organiz',
 				})
 			
 			from partstem.word_list import word_list
@@ -37,11 +51,17 @@ class ParticleStemmer(SnowballStemmer):
 				't': {"with": ['sis'], "exception": []},
 				'z': {"with": ['sis'], "exception": []},
 				'ic': {"with": ['e'], "exception": []},
+				"ier": {"with": ["ying", ""], "exception": []},
 			}
 			self.suffix_rule_list.update(suffix_rule_list)
 			self.suffix_list = sorted(list(self.suffix_rule_list.keys()), key=lambda x: -len(x))
 
 	def __stem(self, word, return_snowball=False):
+		if word.endswith("isation") and word != "improvisation":
+			word = word[:-len("isation")]
+		elif word.endswith("isations") and word != "improvisations":
+			word = word[:-len("isations")]
+		
 		word = self.stemmer.stem(word)
 		stem_word = word
 		num = 0
