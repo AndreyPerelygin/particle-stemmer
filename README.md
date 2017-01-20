@@ -15,3 +15,13 @@ print (st.stem("creation")) # >> creat
 
 print (st.stem("creation", return_snowball=True)) # >> ('creat', 'creation')
 ```
+
+Add custom rule
+---------------
+```python
+st = ParticleStemmer(suffix_rule_list={
+    "ation": {"with": ["ant", ""], "exception": []}
+  })
+
+print (st.stem("creation")) # >> cre
+```
