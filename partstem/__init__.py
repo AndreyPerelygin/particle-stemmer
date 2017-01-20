@@ -12,7 +12,8 @@ class ParticleStemmer(SnowballStemmer):
 				"":"",
 				})
 			
-			self.word_list = json.loads(open("word_list.json", "rb").read())
+			from partstem.word_list import word_list
+			self.word_list = word_list
 			self.word_list += nltk.corpus.words.words()
 			
 			self.stem = self.__stem
