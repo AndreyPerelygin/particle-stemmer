@@ -5,12 +5,13 @@ import nltk
 
 class ParticleStemmer(SnowballStemmer):
 
-	def __init__(self, language="english", ignore_stopwords=False, suffix_rule_list={}):
+	def __init__(self, language="english", ignore_stopwords=False, suffix_rule_list={}, special_words={}):
 		super().__init__(language=language, ignore_stopwords=ignore_stopwords)
 		if language == "english":
 			self.stemmer._EnglishStemmer__special_words.update({
-				"test":"test1",
+				"":"",
 				})
+			self.stemmer._EnglishStemmer__special_words.update(special_words)
 			self.word_list = nltk.corpus.words.words()
 			self.stem = self.__stem
 			self.suffix_rule_list = {
