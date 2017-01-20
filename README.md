@@ -11,9 +11,7 @@ from partstem import ParticleStemmer
 
 st = ParticleStemmer() # language="english" default
 
-print (st.stem("creation"))
-creat
+print (st.stem("creation")) # >> creat
 
-print (st.stem("creation", , return_snowball=True))
-('creat', 'creation')
+print (st.stem("creation", , return_snowball=True)) # >> ('creat', 'creation')
 ```
