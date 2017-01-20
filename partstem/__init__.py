@@ -12,8 +12,8 @@ class ParticleStemmer(SnowballStemmer):
 				"":"",
 				})
 			
-			self.word_list = json.loads(open("word_list.json", r))
-			self.word_list += [el for el in nltk.corpus.words.words() if el not in self.word_list]
+			self.word_list = json.loads(open("word_list.json", "rb").read())
+			self.word_list += nltk.corpus.words.words()
 			
 			self.stem = self.__stem
 			self.suffix_rule_list = {
