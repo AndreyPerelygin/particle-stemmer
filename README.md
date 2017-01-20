@@ -6,7 +6,8 @@ Install
 
 Use
 ---------------
-  ```from partstem import ParticleStemmer
+  ```python
+  from partstem import ParticleStemmer
   
   st = ParticleStemmer() # language="english" default
   
@@ -14,4 +15,5 @@ Use
   creat
   
   print (st.stem("creation", , return_snowball=True))
-  ('creat', 'creation')```
+  ('creat', 'creation')
+  ```
