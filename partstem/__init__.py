@@ -37,7 +37,7 @@ class ParticleStemmer(SnowballStemmer):
 				'or': {"with": ['ion'], "exception": []},
 				'um': {"with": ['a'], "exception": ["medium"]},
 				'a': {"with": ['um'], "exception": ["media"]},
-				'ri': {"with": [''], "exception": []},
+				'ri': {"with": [' -ried'], "exception": []},
 				'er': {"with": ['y'], "exception": []},
 				'al': {"with": ['us'], "exception": []},
 				'us': {"with": ['al'], "exception": []},
@@ -69,7 +69,16 @@ class ParticleStemmer(SnowballStemmer):
 			if stem_word.endswith(self.suffix_list[num]) and stem_word not in self.suffix_rule_list[self.suffix_list[num]]["exception"]:
 				without_suffix = stem_word[:-len(self.suffix_list[num])]
 				for el in self.suffix_rule_list[self.suffix_list[num]]["with"]:
-					if without_suffix + el in self.word_list:
+
+					el = el.replace("+", " ")
+					el = el.replace("-", " -") if "-" in el and " -" not in el else el
+					el = el.split(" ")
+					key = True
+					for el1 in el:
+						if not ((without_suffix + el1 in self.word_list and not el1.startswith("-")) or (without_suffix + el1.replace("-", "") not in self.word_list and el1.startswith("-"))):
+							key = False
+							break
+					if key:
 						stem_word = without_suffix
 						break
 				break
