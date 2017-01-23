@@ -91,27 +91,28 @@ class ParticleStemmer(SnowballStemmer):
 		word = self.stemmer.stem(word)
 		stem_word = word
 		num = 0
-		while num < len(self.suffix_list):
-			if stem_word.endswith(self.suffix_list[num]) and stem_word not in self.suffix_rule_list[self.suffix_list[num]]["exception"]:
-				without_suffix = stem_word[:-len(self.suffix_list[num])]
-				if len(without_suffix) == 0:
-					num += 1
-					continue
-				for el in self.suffix_rule_list[self.suffix_list[num]]["with"]:
+		if word not in list(self.stemmer._EnglishStemmer__special_words.keys()) + list(self.stemmer._EnglishStemmer__special_words.values()):
+			while num < len(self.suffix_list):
+				if stem_word.endswith(self.suffix_list[num]) and stem_word not in self.suffix_rule_list[self.suffix_list[num]]["exception"]:
+					without_suffix = stem_word[:-len(self.suffix_list[num])]
+					if len(without_suffix) == 0:
+						num += 1
+						continue
+					for el in self.suffix_rule_list[self.suffix_list[num]]["with"]:
 
-					el = el.replace("+", " ")
-					el = el.replace("-", " -") if "-" in el and " -" not in el else el
-					el = el.split(" ")
-					key = True
-					for el1 in el:
-						if not ((without_suffix + el1 in self.word_list and not el1.startswith("-")) or (without_suffix + el1.replace("-", "") not in self.word_list and el1.startswith("-"))):
-							key = False
+						el = el.replace("+", " ")
+						el = el.replace("-", " -") if "-" in el and " -" not in el else el
+						el = el.split(" ")
+						key = True
+						for el1 in el:
+							if not ((without_suffix + el1 in self.word_list and not el1.startswith("-")) or (without_suffix + el1.replace("-", "") not in self.word_list and el1.startswith("-"))):
+								key = False
+								break
+						if key:
+							stem_word = without_suffix
 							break
-					if key:
-						stem_word = without_suffix
-						break
-				break
-			num += 1
+					break
+				num += 1
 
-		return (stem_word, word) if return_snowball else stem_word
-		
+			return (stem_word, word) if return_snowball else stem_word
+			
