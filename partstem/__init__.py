@@ -24,6 +24,13 @@ class ParticleStemmer(SnowballStemmer):
 				'organizers': 'organiz',
 				'organizes': 'organiz',
 				'organizing': 'organiz',
+				'science': 'scient',
+				'sciences': 'scient',
+				'scientific': 'scient',
+				'scientifically': 'scient',
+				'scientist': 'scient',
+				'scientistic': 'scient',
+				'scientists': 'scient',
 				})
 			
 			from partstem.word_list import word_list
