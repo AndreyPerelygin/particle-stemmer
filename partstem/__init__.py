@@ -32,6 +32,10 @@ class ParticleStemmer(SnowballStemmer):
 				'scientistic': 'scient',
 				'scientists': 'scient',
 				'animal': 'animal',
+				'animalism': 'animal',
+				'animalistic': 'animal',
+				'animalities': 'animal',
+				'animality': 'animal',
 				'animals': 'animal',
 				})
 			
