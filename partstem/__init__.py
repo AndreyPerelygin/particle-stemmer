@@ -68,6 +68,8 @@ class ParticleStemmer(SnowballStemmer):
 		while num < len(self.suffix_list):
 			if stem_word.endswith(self.suffix_list[num]) and stem_word not in self.suffix_rule_list[self.suffix_list[num]]["exception"]:
 				without_suffix = stem_word[:-len(self.suffix_list[num])]
+				if len(without_suffix) == 0:
+					continue
 				for el in self.suffix_rule_list[self.suffix_list[num]]["with"]:
 
 					el = el.replace("+", " ")
