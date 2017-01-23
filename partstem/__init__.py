@@ -72,10 +72,21 @@ class ParticleStemmer(SnowballStemmer):
 			self.suffix_list = sorted(list(self.suffix_rule_list.keys()), key=lambda x: -len(x))
 
 	def __stem(self, word, return_snowball=False):
-		if word.endswith("isation") and word != "improvisation":
-			word = word[:-len("isation")]
-		elif word.endswith("isations") and word != "improvisations":
-			word = word[:-len("isations")]
+		if not word.startswith("improv"):
+			remove_suffix = {"isate":"izate", "isated":"izated", "isating":"izating", "isates":"izates"}
+			for key in remove_suffix
+			if word.endswith(remove_suffix[key]):
+				word = word[:-len(key)] + remove_suffix[key]
+				break
+
+			remove_suffix = {"ise":"ize", "ised":"ized", "ising":"izing", "ises":"izes"}
+			for key in remove_suffix
+			if word.endswith(remove_suffix[key]):
+				new_word = word[:-len(key)] + remove_suffix[key]
+				if new_word in self.word_list:
+					word = new_word
+					break
+
 		
 		word = self.stemmer.stem(word)
 		stem_word = word
