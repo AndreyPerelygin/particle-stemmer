@@ -114,5 +114,5 @@ class ParticleStemmer(SnowballStemmer):
 					break
 				num += 1
 
-			return (stem_word, word) if return_snowball else stem_word
+		return (stem_word, word) if return_snowball else stem_word
 			
