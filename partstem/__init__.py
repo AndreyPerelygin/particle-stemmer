@@ -31,6 +31,8 @@ class ParticleStemmer(SnowballStemmer):
 				'scientist': 'scient',
 				'scientistic': 'scient',
 				'scientists': 'scient',
+				'animal': 'animal',
+				'animals': 'animal',
 				})
 			
 			from partstem.word_list import word_list
