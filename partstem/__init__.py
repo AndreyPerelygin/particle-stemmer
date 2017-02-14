@@ -343,4 +343,6 @@ class ParticleStemmer(SnowballStemmer):
 				num += 1
 
 		return (stem_word, word) if return_snowball else stem_word
+
+partstem = ParticleStemmer()
 			
