@@ -319,7 +319,7 @@ class ParticleStemmer(SnowballStemmer):
 		word = self.stemmer.stem(word)
 		stem_word = word
 		num = 0
-		if word not in list(self.stemmer._EnglishStemmer__special_words.keys()) + list(self.stemmer._EnglishStemmer__special_words.values()):
+		if word not in list(self.stemmer._EnglishStemmer__special_words.keys()) + list(self.stemmer._EnglishStemmer__special_words.values()) and len(word) >= 3:
 			while num < len(self.suffix_list):
 				if stem_word.endswith(self.suffix_list[num]) and stem_word not in self.suffix_rule_list[self.suffix_list[num]]["exception"]:
 					without_suffix = stem_word[:-len(self.suffix_list[num])]
@@ -342,7 +342,7 @@ class ParticleStemmer(SnowballStemmer):
 					break
 				num += 1
 
-		return (stem_word, word) if return_snowball else stem_word
+		return (stem_word, word) if return_snowball else stem_word if len(stem_word) >= 3 else word
 
 partstem = ParticleStemmer()
 			
