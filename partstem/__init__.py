@@ -289,7 +289,7 @@ class ParticleStemmer(SnowballStemmer):
 				"atori": {"with": ["ation"], "exception": []},
 				"ori": {"with": ["ion"], "exception": []},
 				"ous": {"with": ["y", "", "e", "on", "ity"], "exception": []},
-				"ic": {"with": ["", "e"], "exception": ["sonic", "polic"]},
+				"ic": {"with": ["", "e"], "exception": ["sonic", "polic", "indic"]},
 				"iti": {"with": ["est+ification"], "exception": []},
 				"iz": {"with": ["ize", "izate"], "exception": []},
 				"at": {"with": ["atic", "ance"], "exception": []},
